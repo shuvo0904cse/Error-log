@@ -1,0 +1,34 @@
+<?php
+
+namespace Shuvo\Errorlog\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+
+class ErrorLog extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    public $errorlog;
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    public function __construct($errorlog)
+    {
+        $this->errorlog = $errorlog;
+    }
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        return $this->markdown('errorlog::emails.errorLog', compact("errorlog"));
+    }
+}

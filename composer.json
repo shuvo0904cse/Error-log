@@ -1,0 +1,26 @@
+{
+    "name": "shuvo/errorlog",
+    "description": "Error log send in mail and save in database",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Md. Saiful Islam",
+            "email": "shuvo0904@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Shuvo\\Errorlog\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Shuvo\\Errorlog\\ErrorlogServiceProvider"
+            ]
+        }
+    }
+}
