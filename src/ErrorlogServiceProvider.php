@@ -18,7 +18,7 @@ class ErrorlogServiceProvider extends ServiceProvider{
         //Publish
         $this->publishes([
             __DIR__.'/database/migrations/' => database_path("migrations"),
-            __DIR__.'/views' => resource_path("views/vendor/contact"),
+            __DIR__.'/views' => resource_path("views/vendor/error"),
             __DIR__.'/config/errorMail.php' => config_path("errorMail.php")
         ]);
 

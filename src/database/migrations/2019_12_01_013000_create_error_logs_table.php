@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateErrorlogsTable extends Migration
+class CreateErrorLogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateErrorlogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('errorlogs', function (Blueprint $table) {
+        Schema::create('error_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('method_name');
             $table->string('line_number');
@@ -28,6 +28,7 @@ class CreateErrorlogsTable extends Migration
             $table->string('domain')->nullable();
             $table->enum('is_resolved', ['Yes', 'No'])->default('No');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -38,6 +39,6 @@ class CreateErrorlogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('errorlogs');
+        Schema::dropIfExists('error_logs');
     }
 }

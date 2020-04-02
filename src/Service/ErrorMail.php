@@ -23,16 +23,7 @@ class ErrorMail
      * @param $argument
      * @param $email
      */
-    public static function mailSend($message,
-                                    $view,
-                                    $controller,
-                                    $method,
-                                    $line_number,
-                                    $file_path,
-                                    $object,
-                                    $type,
-                                    $argument,
-                                    $email)
+    public static function mailSend($message, $view, $controller, $method, $line_number, $file_path, $object, $type, $argument, $email)
     {
 
         $domain = $_SERVER['HTTP_HOST'];
@@ -56,25 +47,14 @@ class ErrorMail
         //Mail Send
         Mail::to(config('errorlog.send_to_email'))
             ->cc(config('errorlog.send_cc_email'))
-            ->bcc(config('errorlog.send_bcc_email'))->send(new ErrorLog($data));
+            ->bcc(config('errorlog.send_bcc_email'))
+            ->subject(config('errorlog.subject'))->send(new ErrorLog($data));
 
         /*Save error to database*/
         $screenshot = '';
         $page_url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-        self::saveErrorLog(
-            $controller . "  -  " . $method,
-            $line_number,
-            $file_path,
-            $message,
-            $object,
-            $type,
-            $screenshot,
-            $page_url,
-            $argument,
-            "",
-            $domain
-        );
+        self::saveErrorLog($controller . "  -  " . $method, $line_number, $file_path, $message, $object, $type, $screenshot, $page_url, $argument, "", $domain);
     }
 
     /**
@@ -92,19 +72,7 @@ class ErrorMail
      * @param $prefix
      * @param $domain
      */
-    private static function saveErrorLog(
-        $method,
-        $line_number,
-        $file_path,
-        $message,
-        $object,
-        $type,
-        $screen_shot,
-        $page_url,
-        $argument,
-        $prefix,
-        $domain
-    )
+    private static function saveErrorLog($method, $line_number, $file_path, $message, $object, $type, $screen_shot, $page_url, $argument, $prefix, $domain)
     {
         /*Save error to database*/
         ErrorlogModel::insert([
